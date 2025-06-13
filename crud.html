@@ -12,14 +12,24 @@
             <form class="create_form">
                 <input type="text" class="name" placeholder="Enter your name">
                 <input type="email" class="email" placeholder="Enter your email">
+                <div class="email-error error-message"></div>
                 <input type="text" class="phone" placeholder="Enter 10-digit phone number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"/>
+                <div class="phone-error error-message"></div>
+                <input type="date" class="dob" placeholder="Select date">
+                <input type="text" class="address" placeholder="Enter your address">
+                <div class="address-error error-message"></div>
                 <button type="button" onclick="add()">Create</button>
             </form>
             <form class="update_form">
                 <input type="text" hidden class="id">
                 <input type="text" class="uname">
                 <input type="email" class="uemail">
+                <div class="uemail-error error-message"></div>
                 <input type="text" class="uphone" placeholder="Enter 10-digit phone number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"/>
+                <div class="uphone-error error-message"></div>
+                <input type="date" class="udob" placeholder="Select date">
+                <input type="text" class="uaddress" placeholder="Enter your address">
+                <div class="uaddress-error error-message"></div>
                 <button type="button" onclick="update()">Update</button>
             </form>
             <div class="add_div">
@@ -30,6 +40,8 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
+                    <th>DOB</th>
+                    <th>Address</th>
                     <th>Action</th>
                 </thead>
                 <tbody class="data_table">

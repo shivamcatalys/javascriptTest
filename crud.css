@@ -37,8 +37,16 @@ body {
     /* gap: 10px; */
 }
 
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin: 2px;
+}
+
+
 input[type="text"],
 input[type="tel"],
+input[type="date"],
 input[type="email"] {
     padding: 10px;
     border: 1px solid #ccc;
