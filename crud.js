@@ -154,3 +154,18 @@ function update(){
     readAll()
 }
 
+function addEmptyRow() {
+    const newObj = {
+        id: data.length + 1,
+        name: "",
+        email: "",
+        phone: "",
+        dob: "",
+        address: ""
+    };
+
+    data.push(newObj);
+    readAll();
+}
+
+
