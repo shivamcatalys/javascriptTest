@@ -1,0 +1,127 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Main container */
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form container */
+.form_container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form styles */
+.create_form,
+.update_form {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 10px;
+    /* gap: 10px; */
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+/* Button styling */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="button"] {
+    background-color: #28a745;
+    color: white;
+}
+
+button[type="button"]:hover {
+    background-color: #218838;
+}
+
+/* Add button */
+.add_div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add_div button {
+    background-color: #007bff;
+    color: white;
+}
+
+.add_div button:hover {
+    background-color: #0056b3;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead {
+    background-color: #343a40;
+    color: white;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Action buttons in table */
+.edit,
+.delete {
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    color: white;
+}
+
+.edit {
+    background-color: #ffc107;
+}
+
+.edit:hover {
+    background-color: #e0a800;
+}
+
+.delete {
+    background-color: #dc3545;
+}
+
+.delete:hover {
+    background-color: #c82333;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <link rel="stylesheet" href="crud.css">
+</head>
+<body onload="readAll()">
+    <div class="container">
+        <div class="form_container">
+            <form class="create_form">
+                <input type="text" class="name" placeholder="Enter your name">
+                <input type="email" class="email" placeholder="Enter your email">
+                <input type="text" class="phone" placeholder="Enter 10-digit phone number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"/>
+                <button type="button" onclick="add()">Create</button>
+            </form>
+            <form class="update_form">
+                <input type="text" hidden class="id">
+                <input type="text" class="uname">
+                <input type="email" class="uemail">
+                <input type="text" class="uphone" placeholder="Enter 10-digit phone number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"/>
+                <button type="button" onclick="update()">Update</button>
+            </form>
+            <div class="add_div">
+                <button onclick="create()">Add +</button>
+            </div>
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </thead>
+                <tbody class="data_table">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./crud.js"></script>
+</body>
+</html>
