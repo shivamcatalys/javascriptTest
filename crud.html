@@ -35,15 +35,36 @@
             <div class="add_div">
                 <button onclick="create()">Add +</button>
             </div>
+            <input type="text" id="searchInput" placeholder="Search by name, email, phone..." onkeyup="searchTable()">
+
             <table>
                 <thead>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>DOB</th>
-                    <th>Address</th>
-                    <th>Action</th>
+                    <tr>
+                        <th>
+                            Name 
+                            <span onclick="sortTable('name')" style="cursor:pointer;">🔃</span>
+                        </th>
+                        <th>
+                            Email 
+                            <span onclick="sortTable('email')" style="cursor:pointer;">🔃</span>
+                        </th>
+                        <th>
+                            Phone 
+                            <span onclick="sortTable('phone')" style="cursor:pointer;">🔃</span>
+                        </th>
+                        <th>
+                            DOB 
+                            <span onclick="sortTable('dob')" style="cursor:pointer;">🔃</span>
+                        </th>
+                        <th>
+                            Address 
+                            <span onclick="sortTable('address')" style="cursor:pointer;">🔃</span>
+                        </th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
+                
+                
                 <tbody class="data_table">
 
                 </tbody>
@@ -55,6 +76,8 @@
                     </tr>
                 </tfoot>
             </table>
+            <div id="pagination" style="margin-top: 10px; text-align: center;"></div>
+
         </div>
     </div>
     <script src="./crud.js"></script>

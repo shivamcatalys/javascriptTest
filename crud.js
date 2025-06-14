@@ -1,31 +1,68 @@
 let data=[
     {id:1,name:"shiv",email:"shiv@gmail.com",phone:1234567890,dob:"1999-05-03",address:"New Delhi"},
-    {id:2,name:"shiv1",email:"shiv1@gmail.com",phone:8588090297,dob:"1999-03-05",address:"Bangalore"},
+    {id:2,name:"prag",email:"prag@gmail.com",phone:8588090297,dob:"1999-03-05",address:"Bangalore"},
 ]
 
-function readAll(){
-    localStorage.setItem("object",JSON.stringify(data))
-    var tabledata=document.querySelector(".data_table")
+let currentPage = 1;
+const rowsPerPage = 3;
 
-    var object=localStorage.getItem("object")
-    var objectdata=JSON.parse(object)
-    var elements="";
+let sortColumn = null;
+let sortDirection = "asc"; // or "desc"
 
-    objectdata.map(record=>(
+
+window.onload = function() {
+    readAll();
+    setDOBMaxOnFocus();
+};
+
+
+function readAll() {
+    localStorage.setItem("object", JSON.stringify(data));
+    const tabledata = document.querySelector(".data_table");
+    const object = localStorage.getItem("object");
+    const objectdata = JSON.parse(object);
+
+    // for sorting
+    if (sortColumn) {
+        objectdata.sort((a, b) => {
+            let valA = a[sortColumn];
+            let valB = b[sortColumn];
+
+            // Convert to lowercase for string comparison
+            if (typeof valA === "string") valA = valA.toLowerCase();
+            if (typeof valB === "string") valB = valB.toLowerCase();
+
+            if (valA < valB) return sortDirection === "asc" ? -1 : 1;
+            if (valA > valB) return sortDirection === "asc" ? 1 : -1;
+            return 0;
+        });
+    }
+
+    //for pagination
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    const paginatedData = objectdata.slice(startIndex, endIndex);
+
+    let elements = "";
+
+    paginatedData.forEach(record => {
         elements += `<tr> 
-        <td>${record.name}</td>
-        <td>${record.email}</td>
-        <td>${record.phone}</td>
-        <td>${record.dob}</td>
-        <td>${record.address}</td>
-        <td>
-        <button class="edit" onclick={edit(${record.id})}>Edit</button>
-        <button class="delete" onclick={delet(${record.id})}>Delete</button>
-        </td>
-        </tr>`
-    ))
-    tabledata.innerHTML=elements
+            <td>${record.name}</td>
+            <td>${record.email}</td>
+            <td>${record.phone}</td>
+            <td>${record.dob}</td>
+            <td>${record.address}</td>
+            <td>
+                <button class="edit" onclick="edit(${record.id})">Edit</button>
+                <button class="delete" onclick="delet(${record.id})">Delete</button>
+            </td>
+        </tr>`;
+    });
+
+    tabledata.innerHTML = elements;
+    renderPagination(objectdata.length);
 }
+
 
 function isValidAddress(address) {
     const regex = /^[a-zA-Z0-9\s,-]+$/;
@@ -168,4 +205,69 @@ function addEmptyRow() {
     readAll();
 }
 
+function searchTable() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const table = document.querySelector(".data_table");
+    const rows = table.getElementsByTagName("tr");
 
+    for (let i = 0; i < rows.length; i++) {
+        const rowText = rows[i].innerText.toLowerCase();
+        if (rowText.includes(input)) {
+            rows[i].style.display = "";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+}
+
+function setDOBMaxOnFocus() {
+    document.querySelectorAll(".dob, .udob").forEach(input => {
+        input.addEventListener("focus", () => {
+            const today = new Date().toISOString().split("T")[0];
+            input.max = today;
+        });
+    });
+}
+
+
+function renderPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / rowsPerPage);
+    const paginationContainer = document.getElementById("pagination");
+    let buttons = "";
+
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = "";
+        return;
+    }
+
+    if (currentPage > 1) {
+        buttons += `<button onclick="goToPage(${currentPage - 1})">Previous</button>`;
+    }
+
+    for (let i = 1; i <= totalPages; i++) {
+        buttons += `<button onclick="goToPage(${i})" ${i === currentPage ? 'style="font-weight:bold;"' : ''}>${i}</button>`;
+    }
+
+    if (currentPage < totalPages) {
+        buttons += `<button onclick="goToPage(${currentPage + 1})">Next</button>`;
+    }
+
+    paginationContainer.innerHTML = buttons;
+}
+
+function goToPage(page) {
+    currentPage = page;
+    readAll();
+}
+
+function sortTable(column) {
+    if (sortColumn === column) {
+        // Toggle direction if clicking the same column
+        sortDirection = sortDirection === "asc" ? "desc" : "asc";
+    } else {
+        sortColumn = column;
+        sortDirection = "asc";
+    }
+
+    readAll();
+}
